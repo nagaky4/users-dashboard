@@ -1,0 +1,28 @@
+.flex {
+  display: flex;
+}
+
+.flex-justify--center {
+  justify-content: center;
+}
+
+.flex-justify--between {
+  justify-content: space-between;
+}
+
+.aligns--center {
+  align-items: center;
+}
+
+.btn-back {
+  width: 100px;
+  height: 40px;
+  color: $main;
+  font-size: 1.2rem;
+  background: $background-light;
+  cursor: pointer;
+  border-radius: 8px;
+  &:hover {
+    background: $background-heavy;
+  }
+}

@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 20rem;
+}
+
+main {
+  padding-top: $header-height;
+}
+
+.page-container {
+  padding: 2rem 2rem;
+  @include responsive("small") {
+    padding: 2rem 4rem;
+  }
+}
