@@ -1,14 +1,27 @@
 <template>
-  <div class="spinner">
-    <img src="@/assets/images/loading.png" alt="..." />
-  </div>
+  <Teleport to="body">
+    <div class="spinner-wrapper">
+      <div class="spinner">
+        <img src="@/assets/images/loading.png" alt="..." />
+      </div>
+    </div>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>
+.spinner-wrapper {
+  position: fixed;
+  inset: 0;
+  background: $background-spinner;
+  z-index: 100;
+}
 .spinner {
-  width: 10rem;
-  height: 10rem;
-  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5rem;
+  height: 5rem;
 
   img {
     width: 100%;

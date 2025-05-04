@@ -22,7 +22,7 @@
         <li v-for="item in menuList" :key="item.key">
           <RouterLink
             :to="item.link"
-            active-class="active"
+            exact-active-class="active"
             @click="showMenu = false"
           >
             {{ item.name }}
@@ -39,9 +39,9 @@ import { ref } from "vue";
 
 const menuList = ref<IMenu[]>([
   {
-    key: "about",
-    link: "/about",
-    name: "About",
+    key: "users",
+    link: "/",
+    name: "Users",
   },
   {
     key: "contact",
@@ -73,8 +73,8 @@ header {
     align-items: center;
     img {
       flex-shrink: 0;
-      width: 6rem;
-      height: 3rem;
+      width: 3rem;
+      height: auto;
       object-fit: cover;
       border-radius: 2rem;
     }

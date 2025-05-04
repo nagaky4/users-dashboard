@@ -2,7 +2,7 @@
   <div class="user" @click="$emit('userClicked', user)">
     <div class="user__top">
       <img
-        :src="`https://avatar.iran.liara.run/public/${user.id}`"
+        :src="`https://i.pravatar.cc/100?img=${user.id}`"
         alt="avatar"
         loading="lazy"
       />
@@ -86,7 +86,7 @@ defineProps({
     }
   }
   &__bottom {
-    font-size: 1.2rem;
+    font-size: 1rem;
     .info {
       display: flex;
       gap: 1rem;

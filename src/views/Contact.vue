@@ -1,51 +1,69 @@
 <template>
   <div class="page-container">
-    <div class="content">
-      <div class="info">
-        <p class="info__field">Name:</p>
-        <p title="Trần Phú Quý" class="info__value">Trần Phú Quý</p>
-      </div>
-      <div class="info">
-        <p class="info__field">Email:</p>
-        <p class="info__value">
-          <a
-            title="tranphuquypk1997@gmail.com"
-            href="`mailto:tranphuquypk1997@gmail.com`"
-          >
-            tranphuquypk1997@gmail.com
-          </a>
-        </p>
-      </div>
-      <div class="info">
-        <p class="info__field">Phone:</p>
-        <p class="info__value">
-          <a title="0349467408" :href="`tel:+84349467408`"> 0349467408 </a>
-        </p>
-      </div>
-      <div class="info">
-        <p class="info__field">Address:</p>
-        <address title="Thủ Đức district" class="info__value">
-          Thủ Đức district
-        </address>
+    <div class="contact">
+      <div class="contact__container">
+        <div class="contact__info">
+          <h2 class="contact__title">Get in Touch</h2>
+          <p class="contact__text">Please let me now if any, Thanks!</p>
+          <ul class="contact__details">
+            <li><strong>Email:</strong> tranphuquypk1997@gmail.com</li>
+            <li><strong>Phone:</strong> 0349467408</li>
+            <li><strong>Address:</strong> Thu Duc district</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
-.content {
-  font-size: 1.2rem;
-  .info {
+.contact {
+  padding: 3rem 1rem;
+
+  &__container {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  }
+
+  &__info {
     display: flex;
-    gap: 1rem;
-    &__field {
-      color: $color-light;
-      min-width: 5rem;
+    flex-direction: column;
+    justify-content: center;
+
+    & > * {
+      margin-bottom: 1rem;
     }
-    &__value {
-      color: $color-bold;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    color: #111827;
+    font-weight: 600;
+  }
+
+  &__text {
+    color: #6b7280;
+    font-size: 1rem;
+  }
+
+  &__details {
+    list-style: none;
+    padding: 0;
+    font-size: 0.95rem;
+    color: #4b5563;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      strong {
+        color: #111827;
+      }
     }
   }
 }

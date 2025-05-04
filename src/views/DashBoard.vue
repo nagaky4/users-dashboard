@@ -1,6 +1,7 @@
 <template>
   <div class="page-container">
-    <Filter
+    <h1>Users</h1>
+    <BaseFilter
       :sortByList="sortByList"
       v-model:searchText="searchText"
       v-model:sortBy="sortBy"
@@ -8,36 +9,62 @@
       @onSort="handleSort"
       @onSearch="handleSearch"
       placeholder="Search"
-    ></Filter>
-    <div v-if="isLoading">
-      <Spinner />
+    ></BaseFilter>
+
+    <div v-if="users.length" class="users-container">
+      <BaseTable
+        :fields="userFields"
+        :items="users"
+        @rowClick="userClicked"
+        class="users-container--table"
+      />
+      <UserList
+        :users="users"
+        @userClicked="userClicked"
+        class="users-container--list"
+      />
     </div>
-    <template v-else>
-      <UserList :users="users" v-if="users.length" @userClicked="userClicked" />
-      <h3 class="data-not-found" v-else>
-        {{ noDataMessage }}
-      </h3>
-    </template>
+    <h3 v-else class="data-not-found">
+      {{ noDataMessage }}
+    </h3>
   </div>
 </template>
 <script setup lang="ts">
 import { ISortBy, IUser } from "@/types";
-import { AxiosInstance } from "axios";
-import { inject, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import UserList from "@/components/users/UserList.vue";
-import Filter from "@/components/Filter.vue";
-
+import BaseFilter from "@/components/BaseFilter.vue";
 import { DATA_NOT_FOUND } from "@/constants/message";
 import { useSortable } from "@/composables/sortable";
-import Spinner from "@/components/core/Spinner.vue";
 import router from "@/router";
-
-const $axios = inject("$axios") as AxiosInstance;
+import { getUsers } from "@/services/users";
+import BaseTable from "@/components/BaseTable.vue";
+import { IField } from "@/types/table";
+import { useLoading } from "@/composables/loading";
 
 const { initSortSearchFunction, sort, search } = useSortable();
+const { showLoading, hideLoading } = useLoading();
+
+const userFields: Array<IField> = [
+  {
+    key: "name",
+    title: "Name",
+  },
+  {
+    key: "email",
+    title: "Email",
+  },
+  {
+    key: "phone",
+    title: "Phone",
+  },
+  {
+    key: "address.city",
+    title: "Address",
+  },
+];
 
 const users = ref<IUser[]>([]);
-const isLoading = ref(false);
 const noDataMessage = ref(DATA_NOT_FOUND);
 
 const sortByList = ref<ISortBy[]>([
@@ -51,15 +78,16 @@ const isAsc = ref(true);
 
 onMounted(async () => {
   try {
-    isLoading.value = true;
-    const res = await $axios.get("/users");
+    showLoading();
+    const res = await getUsers();
     users.value = res.data;
     initSortSearchFunction(users.value);
     handleSort();
-  } catch (error) {
+  } catch (error: any) {
     // handle error
+    console.log("error", error.response.message || error);
   } finally {
-    isLoading.value = false;
+    hideLoading();
   }
 });
 
@@ -84,6 +112,19 @@ const userClicked = (user: IUser) => {
 
   @include responsive("small") {
     font-size: 2rem;
+  }
+}
+.users-container {
+  &--table {
+    display: none;
+    @include responsive("small") {
+      display: block;
+    }
+  }
+  &--list {
+    @include responsive("small") {
+      display: none;
+    }
   }
 }
 </style>

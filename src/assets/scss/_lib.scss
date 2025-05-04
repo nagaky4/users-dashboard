@@ -14,15 +14,26 @@
   align-items: center;
 }
 
-.btn-back {
-  width: 100px;
-  height: 40px;
-  color: $main;
-  font-size: 1.2rem;
-  background: $background-light;
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: $blue;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+
   &:hover {
-    background: $background-heavy;
+    background: $blueHover;
+  }
+
+  &--secondary {
+    background: $background-light4;
+    color: #333;
+
+    &:hover {
+      background: $background-light5;
+    }
   }
 }

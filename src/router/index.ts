@@ -12,26 +12,33 @@ const routes: Array<RouteRecordRaw> = [
         path: "",
         name: "dashboard",
         component: () => import("@/views/DashBoard.vue"),
+        meta: {
+          title: "DashBoard",
+        },
       },
       {
         path: "/users/:id",
         name: "user-detail",
         component: () => import("@/views/UserDetail.vue"),
-      },
-      {
-        path: "/about",
-        name: "about",
-        component: () => import("@/views/About.vue"),
+        meta: {
+          title: "UsersDetail",
+        },
       },
       {
         path: "/contact",
         name: "contact",
         component: () => import("@/views/Contact.vue"),
+        meta: {
+          title: "Contact",
+        },
       },
       {
         path: "/not-found",
         name: "not-found",
         component: () => import("@/views/NotFound.vue"),
+        meta: {
+          title: "NotFound",
+        },
       },
     ],
   },
@@ -39,12 +46,20 @@ const routes: Array<RouteRecordRaw> = [
     path: "/:pathMatch(.*)*",
     name: "not-found",
     component: () => import("@/views/NotFound.vue"),
+    meta: {
+      title: "NotFound",
+    },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title as string;
+  next();
 });
 
 export default router;
